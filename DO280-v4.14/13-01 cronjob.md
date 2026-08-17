@@ -75,6 +75,13 @@ spec:
 ### Or we can use the command line help and then modify the values as per our requirements.
 ```
 oc create cronjob -h
+
+oc create cronjob weekly-backup \
+  --schedule="30 2 * * 0" \
+  --image=registry.io/backup-tool \
+  --namespace=lion \
+  --dry-run=client -o yaml \
+  -- sh -c "echo 'Running backup...' && /usr/local/bin/backup.sh" > cronjob.yaml
 ```
 ### Verification
 
